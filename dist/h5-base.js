@@ -9,6 +9,7 @@
 * ---------------函数 列表--------------——
 * @screenAdapt       px=>rem的适配
 * @getUrlparam       获取url参数
+* @getDataUrl        获取图片base64编码
 * @judgePlat         判断平台类型
 * @isAndroid         判断是否为安卓设备
 * @isIOS             判断是否为IOS设备
@@ -24,7 +25,7 @@
 * @animArrow         向下滑动指示箭头
 * @downloadApp       banner下载
 * @rotateTip         横竖屏切换提示
-* @shareWx           分享到微信
+* @shareWx           分享到微信配置
 *****************************************/
 
 ;(function(window, $, undefined){
@@ -39,6 +40,7 @@
         var resizeNum = 0,
             winW = window.innerWidth,
             screenW = window.screen.width;
+        designW = designW || 750;
         var resize = function(){
             winW = screenW>designW ? designW : winW;
             document.getElementsByTagName("html")[0].style.fontSize=winW*(100/designW)+"px";
@@ -72,10 +74,53 @@
     };
 
     /**
+    * 获取图片base64编码，用于图片上传
+    * @function getDataUrl
+    * @param {file:一般由input change获取, callback:异步读取 需要回调操作}
+    **/
+    MT.getDataUrl = function(file, callback) {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = function(e) {
+        var image = new Image();
+
+        image.onload = function () {
+          var canvas = document.createElement('canvas');
+          var imageWidth = this.naturalWidth,
+              imageHeight = this.naturalHeight,
+              maxWidth = 800,
+              maxHeight = 600;
+          var ratio = imageWidth / imageHeight;
+          if (ratio > 1) {
+            imageWidth = (maxWidth > imageWidth) ? imageWidth : maxWidth;
+            imageHeight = Math.round(imageWidth / ratio);
+            if (imageHeight > maxHeight) {
+              imageHeight = maxHeight;
+              imageWidth = Math.round(imageHeight * ratio);
+            }
+          } else {
+            imageHeight = (maxHeight > imageHeight) ? imageHeight : maxHeight;
+            imageWidth = Math.round(imageHeight * ratio);
+            if (imageWidth > maxWidth) {
+              imageWidth = maxWidth;
+              imageHeight = Math.round(imageWidth / ratio);
+            }
+          }
+          canvas.width = imageWidth;
+          canvas.height = imageHeight;
+          canvas.getContext('2d').drawImage(this, 0, 0);
+          callback(canvas.toDataURL('image/jpeg').substring(23));
+        };
+        image.src = e.target.result;
+      };
+
+    };
+
+    /**
     * 获取url参数
     * @function judgePlat
     **/
-    MT.judgePlat = function(system){
+    MT.judgePlat = function(){
         var browser   = "other",
             ua        = navigator.userAgent.toLowerCase(),
             android   = /Android|HTC/i.test(ua), /* HTC Flyer平板的UA字符串中不包含Android关键词 */

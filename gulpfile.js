@@ -1,15 +1,15 @@
-var gulp      = require('gulp'),
-    concat    = require('gulp-concat'),
-    less      = require('gulp-less'),
-    minifycss = require('gulp-minify-css'),
-    uglify    = require('gulp-uglify'),
-    csslint   = require('gulp-csslint'),
-    jshint    = require('gulp-jshint'),
-    rename    = require('gulp-rename'),
-    q         = require('q'),
-    rev       = require('gulp-rev'),
+var gulp         = require('gulp'),
+    concat       = require('gulp-concat'),
+    less         = require('gulp-less'),
+    minifycss    = require('gulp-minify-css'),
+    uglify       = require('gulp-uglify'),
+    csslint      = require('gulp-csslint'),
+    jshint       = require('gulp-jshint'),
+    rename       = require('gulp-rename'),
+    q            = require('q'),
+    rev          = require('gulp-rev'),
     revcollector = require('gulp-rev-collector'),
-    lazypipe  = require('lazypipe');
+    lazypipe     = require('lazypipe');
 
 var compilecss = lazypipe()
     .pipe(less)
