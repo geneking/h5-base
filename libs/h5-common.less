@@ -1,0 +1,124 @@
+/************************************
+* @author: weigang.jin@renren-inc.com
+* @vsersion 1.0
+* ---------- 基础样式 ----------------
+************************************/
+
+*{
+    margin:0;
+    padding:0;
+    word-wrap:break-word;
+}
+ul,li{
+    list-style: none;
+    overflow: hidden;
+}
+.clearfix {
+    *zoom: 1;
+}
+.clearfix::after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+body{
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.25rem;
+    opacity: 0;
+    font-family: 'microsoft yahei,STXihei,Arial';
+}
+.mt-mask{
+    display: none;
+    position: fixed;
+    top:0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,.6);
+    z-index: 9999;
+}
+
+/********** animArrow start *******/
+.mt-animate-arrow{
+    position: fixed;
+    display: block;
+    left: 50%;
+    bottom: .4rem;
+    -webkit-transform: translate3d(-50%,-50%,0);
+    -webkit-animation: updown 1.5s ease infinite normal both;
+}
+/********** animArrow end ********/
+
+/********** toatst start *********/
+.mt-toast{
+    position: fixed;
+    width: auto;
+    background: rgba(0,0,0,.8);
+    padding:0.4rem 0.5rem;
+    border-radius: 0.12rem;
+    z-index: 10001;
+    top:50%;
+    left: 50%;
+    -webkit-transform:translate3d(-50%,-50%,0);
+    font-size: 0.3rem;
+    color: #fff;
+    text-align: center;
+    width: 3.4rem;
+}
+/********** toatst end **********/
+
+/***** confirm-dialog start *****/
+.mt-confirm-dialog{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform:translate3d(-50%,-50%,0);
+    width: 5.32rem;
+    font-size: .3rem;
+    color: #000;
+    border-radius: .2rem;
+    background: #DEE4EA;
+    text-align: center;
+    overflow: hidden;
+    z-index: 10000;
+    .text{
+        width: 100%;
+        height: 1.4rem;
+        line-height: 1.4rem;
+        border-bottom: 0.01rem solid #98AFC0;
+    }
+    span{
+        float: left;
+        display: inline-block;
+        width: 2.65rem;
+        height: 1rem;
+        line-height: 1rem;
+        color: #087EFF;
+        background: #DEE4EA;
+    }
+    .mt-confirm-btn{border-right: 0.01rem solid #98AFC0;}
+    .mt-touch-btn{background: #98AFC0;}
+}
+/***** confirm-dialog end ******/
+
+/****** rotateTip start *******/
+.mt-zindex{z-index:10001;}
+.mt-mask span{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    -webkit-transform:translate(-50%,-50%);
+    font-size: 0.3rem;
+    color: #fff;
+}
+@media all and (orientation : landscape) {
+.mt-mask{display:block}
+}
+@media all and (orientation : portrait) {
+.mt-mask{display:none}
+}
+/****** rotateTip end *******/
