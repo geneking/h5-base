@@ -3,4 +3,5 @@ $(function(){
   MT.screenAdapt(640);
   //网络连接监听
   MT.listenNet();
+  console.log(111111);
 });
