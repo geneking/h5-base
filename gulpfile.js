@@ -34,10 +34,10 @@ gulp.task('css', function() {
     gulp.src(['libs/h5-common.less'])
       .pipe(compilecss())
       .pipe(rename('h5-base.css'))
-      .pipe(gulp.dest('dist'))
+      .pipe(gulp.dest('dist/libs'))
       .pipe(minifycss())
       .pipe(rename('h5-base.min.css'))
-      .pipe(gulp.dest('dist'));
+      .pipe(gulp.dest('dist/libs'));
     //return deferred.promise;
 });
 
@@ -46,10 +46,10 @@ gulp.task('js', function() {
         .pipe(jshint())
         .pipe(jshint.reporter())
         .pipe(concat('h5-base.js'))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dist/libs'))
         .pipe(uglify())
         .pipe(rename('h5-base.min.js'))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist/libs'));
         /*.pipe(rev())
         .pipe(gulp.dest('dist'))
         .pipe(rev.manifest())
