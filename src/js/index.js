@@ -6,5 +6,6 @@ $(function(){
   //网络连接监听
   MT.listenNet();
 
+  //MT.toast('我是提示',3000);
 
 });

@@ -34,17 +34,16 @@
     /**
     * viewport缩放
     * @function screenAdapt
-    * @param {designW:设计稿尺寸，一般为640/750}
+    * @param {designW:设计稿尺寸，一般为640px/750px}
     **/
     MT.screenAdapt = function(designW){
         var resizeNum = 0,
             winW = window.innerWidth,
             screenW = window.screen.width;
-        designW = designW || 750;
         var resize = function(){
-            winW = screenW>designW ? designW : winW;
+            winW = screenW>414 ? 414 : winW;
             document.getElementsByTagName("html")[0].style.fontSize=winW*(100/designW)+"px";
-            if(winW>window.screen.width && resizeNum<=10){
+            if(winW>screenW && resizeNum<=10){
                 setTimeout(function(){
                     resize(++resizeNum);
                 }, 100);
