@@ -6,9 +6,9 @@ var gulp         = require('gulp'),
     csslint      = require('gulp-csslint'),
     jshint       = require('gulp-jshint'),
     rename       = require('gulp-rename'),
-    q            = require('q'),
-    rev          = require('gulp-rev'),
-    revcollector = require('gulp-rev-collector'),
+    //q            = require('q'),
+    //rev          = require('gulp-rev'),
+    //revcollector = require('gulp-rev-collector'),
     lazypipe     = require('lazypipe');
 
 var compilecss = lazypipe()
@@ -56,10 +56,7 @@ gulp.task('js', function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['js','css']);
-gulp.task('watch', function(){
-  gulp.watch(['src/css/*.less'],['less']);
-  gulp.watch(['src/js/*.js'],['js']);
-  gulp.watch(['libs/*.less'],['less']);
-  gulp.watch(['libs/*.js'],['js']);
+gulp.task('default', function(){
+  gulp.watch(['src/css/*.less','libs/*.less'],['css']);
+  gulp.watch(['src/js/*.js','libs/*.js'],['js']);
 });
