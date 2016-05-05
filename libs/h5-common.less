@@ -13,6 +13,7 @@ ul,li{
     list-style: none;
     overflow: hidden;
 }
+input{ -webkit-appearance: none;}
 .clearfix {
     *zoom: 1;
 }
@@ -73,7 +74,7 @@ body{
 
 /***** confirm-dialog start *****/
 .mt-confirm-dialog{
-    position: absolute;
+    position: fixed;;
     top: 50%;
     left: 50%;
     -webkit-transform:translate3d(-50%,-50%,0);
@@ -116,9 +117,9 @@ body{
     color: #fff;
 }
 @media all and (orientation : landscape) {
-.mt-mask{display:block}
+.mt-mask{display:block;}
 }
 @media all and (orientation : portrait) {
-.mt-mask{display:none}
+.mt-mask{display:none;}
 }
 /****** rotateTip end *******/

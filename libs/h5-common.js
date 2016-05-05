@@ -14,7 +14,7 @@
 * @setCookie         设置cookie
 * @getCookie         获取cookie
 * @delCookie         删除cookie
-* @startTimer        定时器
+* @getPhoneCode        定时器
 * @delayGo           延迟处理/跳转
 * @cutContent        字符串截取
 * @toast             toast弹层
@@ -179,19 +179,19 @@
 
     /**
     * 启动一个定时器
-    * @function startTimer
+    * @function getPhoneCode
     * @param {dom:按钮dom对象, time:时间s, disabled:置灰类, getCode:获取验证码的方法}
     **/
-    MT.startTimer = function(dom, time, disabled, getCode){
+    MT.getPhoneCode = function(dom, time, disabled, sendCode){
         var timer = null,
             count = time,
             disabled = disabled || "";
         dom.on("touchstart", function(){
-            if(dom.data("lock")) return;
-            if(typeof getCode == 'function'){
+            if(Boolean(dom.data("lock"))) return;
+            if(typeof sendCode == 'function'){
               getCode();//发送验证码
             } else {
-              MT.toatst('错误:该参数应为函数');
+              MT.toast('错误:'+sendCode+'参数应为函数');
             }
             dom.addClass(disabled).data("lock",true);
             timer = setInterval(function(){
@@ -264,17 +264,28 @@
     };
 
     /**
+    * 屏幕旋转后刷新页面
+    * @function orientation
+    */
+    MT.orientation = function(){
+      window.addEventListener('orientationchange',function(){
+          location.reload();
+      });
+    };
+
+    /**
     * 黑色浮层弹窗
     * @function confirmDialog
     * @param {option:参数配置}
     */
     MT.confirm = function(_option){
         var option = $.extend({
-            text: "这里添加提示文案",
+            text: "提示",
             okBtnText: "确定",
             cancelBtnText: "取消",
             okCallback: function(){
-                this.close();
+            },
+            cancelCallback: function(){
             },
             close:function(){
                 $(".mt-confirm-dialog").remove();
@@ -289,21 +300,25 @@
                     '</div>',
                     '<div class="mt-mask"></div>'].join("");
         $("body").append(html);
+        $(".mt-mask").show();
+        var confirmBtn = $('.mt-confirm-btn'),
+            canceBtn = $(".mt-cancel-btn");
 
-        $(".mt-confirm-btn").on("touchstart",function(){
-            $(confirmBtn).addClass("touch-btn");
+        confirmBtn.on("touchstart",function(){
+            confirmBtn.addClass("touch-btn");
         })
         .on("touchend",function(){
-            $(confirmBtn).removeClass("touch-btn");
+            confirmBtn.removeClass("touch-btn");
             option.okCallback();
             option.close();
         });
 
-        $(".mt-cancel-btn").on("touchstart",function(){
-            $(".mt-cancel-btn").addClass("mt-touch-btn");
+        canceBtn.on("touchstart",function(){
+            canceBtn.addClass("mt-touch-btn");
         })
         .on("touchend",function(){
-            $(".mt-cancel-btn").removeClass("mt-touch-btn");
+            canceBtn.removeClass("mt-touch-btn");
+            option.cancelCallback();
             option.close();
         });
     };
