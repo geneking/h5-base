@@ -1,5 +1,3 @@
-
-
 /****************************************
 * @author: jinweigang
 * @vsersion 1.0
@@ -14,11 +12,12 @@
 * @setCookie         设置cookie
 * @getCookie         获取cookie
 * @delCookie         删除cookie
-* @getPhoneCode        定时器
+* @getPhoneCode      获取手机验证码
 * @delayGo           延迟处理/跳转
 * @cutContent        字符串截取
 * @toast             toast弹层
 * @listenNet         监听网络状态连接
+* @orientation       旋转屏幕后刷新页面
 * @confirm           confirm弹层
 * @animArrow         向下滑动指示箭头
 * @downloadApp       banner下载
@@ -27,7 +26,10 @@
 *****************************************/
 
 ;(function(window, $, undefined){
-    window.MT = {};
+    window.MT = {
+      TOUCH_START: "touchstart",
+      TOUCH_END: "touchend"
+    };
 
     /**
     * viewport缩放
@@ -39,8 +41,12 @@
             winW = window.innerWidth,
             screenW = window.screen.width;
         var resize = function(){
-            winW = screenW>414 ? 414 : winW;
-            document.getElementsByTagName("html")[0].style.fontSize=winW*(100/designW)+"px";
+            if(screenW > 640){
+              winW = 640;
+              MT.TOUCH_START = "click";
+              MT.TOUCH_END   = "click";
+            }
+            document.getElementsByTagName("html")[0].style.fontSize=(winW/designW)*100+"px";
             if(winW>screenW && resizeNum<=10){
                 setTimeout(function(){
                     resize(++resizeNum);
@@ -49,6 +55,7 @@
                 document.getElementsByTagName("body")[0].style.opacity = 1;
             }
         }
+        resize();
         setTimeout(resize, 100);
         window.onresize = resize;
     };
@@ -63,7 +70,7 @@
           reg = /([^?=&]+)(=([^&]*))?/g,
           data = {};
       if (href) {
-        encodeURIComponent(href).replace(reg, function($0, $1, $2, $3) {
+        decodeURIComponent(href).replace(reg, function($0, $1, $2, $3) {
           data[$1] = $3;
         });
       }
@@ -177,34 +184,45 @@
         MT.setCookie(key,"",-1);
     };
 
-    /**
-    * 启动一个定时器
-    * @function getPhoneCode
-    * @param {dom:按钮dom对象, time:时间s, disabled:置灰类, getCode:获取验证码的方法}
-    **/
-    MT.getPhoneCode = function(dom, time, disabled, sendCode){
-        var timer = null,
-            count = time,
-            disabled = disabled || "";
-        dom.on("touchstart", function(){
-            if(Boolean(dom.data("lock"))) return;
-            if(typeof sendCode == 'function'){
-              getCode();//发送验证码
-            } else {
-              MT.toast('错误:'+sendCode+'参数应为函数');
-            }
-            dom.addClass(disabled).data("lock",true);
-            timer = setInterval(function(){
-                if (--count > 0) {
-                    dom.text("重新发送(" + count + ")");
-                } else {
-                    dom.removeClass(disabled).text("重新发送").data("lock",false);
-                    clearInterval(timer);
-                    count = time;
-                }
-            },1000);
-        });
-    };
+  /**
+   * 启动一个定时器
+   * @function getPhoneCode
+   * @param {_option:参数集合}
+   **/
+  MT.getPhoneCode = function(_option) {
+    var option = $.extend({
+      sendBtn: null,         //发送按钮
+      time: 60,              //倒计时时间
+      disabled: 'disabled',  //按钮禁止点击class
+      sendCode: function() {}//发送验证码函数
+    }, _option);
+    var timer = null,
+      count = option.time;
+
+    option.sendBtn.on(MT.TOUCH_START, function() {
+      if (option.sendBtn.data("lock") == "true") return;
+      if (typeof option.sendCode == 'function') {
+        option.sendCode(); //发送验证码
+      } else {
+        MT.toast('错误:' + option.sendCode + '应为函数');
+        return false;
+      }
+      option.sendBtn.addClass(option.disabled).data("lock", true);
+      option.sendBtn.text("重新发送(60)");
+      timer = setInterval(function() {
+        if (--count > 0) {
+          option.sendBtn.text("重新发送(" + count + ")");
+        } else {
+          option.sendBtn.removeClass(option.disabled).text("重新发送").data(
+            "lock",
+            false);
+          clearInterval(timer);
+          count = option.time;
+        }
+      }, 1000);
+    });
+  };
+
 
     /**
     * 延迟处理/跳转
@@ -244,9 +262,10 @@
     MT.toast = function(text, time, callback){
         $(".mt-toast").remove();
         $("body").append("<div class='mt-toast'><p>"+text+"</p></div>");
-        setTimeout(function(){
+        var timer = setTimeout(function(){
             $(".mt-toast").remove();
             if(callback) callback();
+            clearTimeout(timer);
         },time || 2000);
     };
 
@@ -304,19 +323,19 @@
         var confirmBtn = $('.mt-confirm-btn'),
             canceBtn = $(".mt-cancel-btn");
 
-        confirmBtn.on("touchstart",function(){
+        confirmBtn.on(MT.TOUCH_START,function(){
             confirmBtn.addClass("touch-btn");
         })
-        .on("touchend",function(){
+        .on(MT.TOUCH_END,function(){
             confirmBtn.removeClass("touch-btn");
             option.okCallback();
             option.close();
         });
 
-        canceBtn.on("touchstart",function(){
+        canceBtn.on(MT.TOUCH_START,function(){
             canceBtn.addClass("mt-touch-btn");
         })
-        .on("touchend",function(){
+        .on(MT.TOUCH_END,function(){
             canceBtn.removeClass("mt-touch-btn");
             option.cancelCallback();
             option.close();
