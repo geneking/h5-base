@@ -32,31 +32,33 @@
     };
 
     /**
-    * viewport缩放
-    * @function screenAdapt
+    * viewport缩放,px转rem
+    * @function p2m
     * @param {designW:设计稿尺寸，一般为640px/750px}
     **/
-    MT.screenAdapt = function(designW){
+    MT.p2m = function(designW){
         var resizeNum = 0,
-            winW = window.innerWidth,
-            screenW = window.screen.width;
+            timer     = null,
+            winW      = window.innerWidth,
+            screenW   = window.screen.width;
         var resize = function(){
-            if(screenW > 640){
-              winW = 640;
+            if(screenW > 414){
+              winW = 414;
               MT.TOUCH_START = "click";
               MT.TOUCH_END   = "click";
             }
             document.getElementsByTagName("html")[0].style.fontSize=(winW/designW)*100+"px";
             if(winW>screenW && resizeNum<=10){
-                setTimeout(function(){
+                timer = setTimeout(function(){
                     resize(++resizeNum);
                 }, 100);
             } else {
                 document.getElementsByTagName("body")[0].style.opacity = 1;
             }
-        }
+            clearTimeout(timer);
+        };
         resize();
-        setTimeout(resize, 100);
+        timer = setTimeout(resize, 100);
         window.onresize = resize;
     };
 
@@ -125,10 +127,8 @@
     * @function judgePlat
     **/
     MT.judgePlat = function(){
-        var browser   = "other",
-            ua        = navigator.userAgent.toLowerCase(),
-            android   = /Android|HTC/i.test(ua), /* HTC Flyer平板的UA字符串中不包含Android关键词 */
-            ios       =  !android && /iPod|iPad|iPhone/i.test(ua);
+        var browser = "other",
+            ua      = navigator.userAgent.toLowerCase();
 
         if(/MicroMessenger/i.test(ua)) browser="weixin";
         if(/weibo/i.test(ua))          browser="weibo";
