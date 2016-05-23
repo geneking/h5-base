@@ -3,7 +3,7 @@
 * @vsersion 1.0
 
 * ---------------函数 列表--------------——
-* @screenAdapt       px=>rem的适配
+* @p2m               px=>rem的适配
 * @getUrlparam       获取url参数
 * @getDataUrl        获取图片base64编码
 * @judgePlat         判断平台类型
@@ -42,6 +42,7 @@
             winW      = window.innerWidth,
             screenW   = window.screen.width;
         var resize = function(){
+            clearTimeout(timer);
             if(screenW > 414){
               winW = 414;
               MT.TOUCH_START = "click";
@@ -55,9 +56,7 @@
             } else {
                 document.getElementsByTagName("body")[0].style.opacity = 1;
             }
-            clearTimeout(timer);
         };
-        resize();
         timer = setTimeout(resize, 100);
         window.onresize = resize;
     };

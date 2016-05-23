@@ -56,7 +56,8 @@ gulp.task('js', function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', function(){
-  gulp.watch(['src/css/*.less','libs/*.less'],['css']);
-  gulp.watch(['src/js/*.js','libs/*.js'],['js']);
-});
+// gulp.task('default', function(){
+//   gulp.watch(['src/css/*.less','libs/*.less'],['css']);
+//   gulp.watch(['src/js/*.js','libs/*.js'],['js']);
+// });
+gulp.task('default', ['css','js']);
