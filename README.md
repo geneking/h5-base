@@ -1,7 +1,8 @@
 # h5-common
 
-&nbsp;&nbsp;&nbsp;&nbsp;前段时间总结完善了一个H5的基础函数库,包括常用的工具函数，及一些小组件，最终用gulp将zepto和common库打包成h5-base.js和h5-base.css大家有兴趣的可以在git上补充，以后的想法是做成像jquery-ui一样可定制生成base库，需要zepto打包zepto,依赖jquery打包jquery等。
 ----------------
+&nbsp;&nbsp;&nbsp;&nbsp;前段时间总结完善了一个H5的基础函数库,包括常用的工具函数，及一些小组件，最终用gulp将zepto和common库打包成h5-base.js和h5-base.css大家有兴趣的可以在git上补充，以后的想法是做成像jquery-ui一样可定制生成base库，需要zepto打包zepto,依赖jquery打包jquery等。
+
 ## 一、函数列表
 
 > * p2m                        px=>rem的适配
