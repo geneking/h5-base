@@ -1,17 +1,70 @@
 body {
-  width: 6.3rem;
-  padding: 0.2rem 0;
+  background-color: #f6f6f6;
+}
+.main {
+  width: 6.4rem;
   margin: 0 auto;
-  color: #333;
-  background-color: #EBEEF2;
 }
-section h3 {
-  height: 0.6rem;
-  line-height: 0.6rem;
-  padding-left: 0.05rem;
-  color: #00abe4;
+.login-head {
+  width: 6.4rem;
+  height: 4.2rem;
+  margin-bottom: .3rem;
+  background: url(../images/login-head.jpg) no-repeat;
+  background-size: 100%;
 }
-section p {
-  line-height: 0.45rem;
-  padding-left: 0.15rem;
+form {
+  width: 4.6rem;
+  margin: 0 auto;
+}
+.input-wrap {
+  margin: .2rem 0;
+  border-bottom: .02rem solid #d9d9d9;
+}
+.input-wrap i {
+  display: inline-block;
+  height: .85rem;
+  width: .6rem;
+  background: url(../images/login-icon.png) no-repeat;
+  background-size: .65rem;
+  background-position: 0 .2rem;
+}
+.input-wrap .pass {
+  background-position: 0 -0.7rem;
+}
+.input-wrap input {
+  float: right;
+  height: .85rem;
+  width: 3.7rem;
+  padding-left: .3rem;
+  border: none;
+  font-size: .32rem;
+  background-color: #f6f6f6;
+}
+.input-wrap input:focus {
+  outline: hidden;
+}
+.login {
+  width: 4.6rem;
+  height: .8rem;
+  margin: .8rem auto;
+  line-height: .8rem;
+  text-align: center;
+  color: #fff;
+  font-size: .28rem;
+  background-color: #1ab2e8;
+  border-radius: .05rem;
+}
+.footer {
+  width: 4.6rem;
+  margin: 1.5rem auto .5rem auto;
+}
+.footer a {
+  float: left;
+  display: inline-block;
+  width: 2.3rem;
+  color: #a2a2a2;
+  text-decoration: none;
+}
+.footer .register {
+  text-align: right;
 }

@@ -68,8 +68,8 @@
     * @function getUrlParam
     * @param {name:url参数名称}
     **/
-    MT.getUrlParam = function(href) {
-      var href = href || window.location.search,
+    MT.getUrlParam = function(url) {
+      var href = url || window.location.search,
           reg = /([^?=&]+)(=([^&]*))?/g,
           data = {};
       if (href) {
@@ -160,8 +160,8 @@
     **/
     MT.setCookie = function(key, value, days){
        var expire = new Date(),
-           expire = expire.getTime() + days*24*60*60*1000;
-       document.cookie = key + "=" + escape(value) + ";expires=" + new Date(expire);
+           expireTime = expire.getTime() + days*24*60*60*1000;
+       document.cookie = key + "=" + escape(value) + ";expires=" + new Date(expireTime);
     };
 
     /**
@@ -172,7 +172,7 @@
     MT.getCookie = function(key){
         var reg = new RegExp("(^| )"+name+"=([^;]*)(;|$)"),
             arr = document.cookie.match(reg);
-        if(arr != null) return unescape(arr[2]);
+        if(arr !== null) return unescape(arr[2]);
         return false;
     };
 

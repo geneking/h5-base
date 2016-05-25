@@ -1,51 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>h5-common 介绍</title>
-    <link rel="stylesheet" href="dist/h5-base.min.css" charset="utf-8">
-    <link rel="stylesheet" href="dist/css/index.css" charset="utf-8">
-    <script type="text/javascript" src="dist/h5-base.min.js"></script>
-    <script type="text/javascript" src="dist/js/index.js"></script>
-  </head>
-  <body>
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<title>登录</title>
+		<link rel="stylesheet" href="./dist/h5-base.css">
+		<link rel="stylesheet" href="./dist/css/index.css">
+		<script type="text/javascript" src="./dist/h5-base.js"></script>
+	</head>
+	<body>
+		<div class="main">
+			<section class="login-head">
+			</section>
 
-    <section>
-      <h3>1.屏幕适配-screenAdapt</h3>
-      <p>(1)调用: MT.screenAdapt(designW);</p>
-      <p>(2)其中designW为设计稿尺寸，一般为750px/640px;</p>
-      <p>(3)注：该方法应在初始化时调用;</p>
-    </section>
+			<form>
+				<div class="input-wrap">
+					<i></i>
+					<input type="text" name="email" value="">
+				</div>
+				<div class="input-wrap">
+					<i class="pass"></i>
+					<input type="password" name="password" value="" maxlength="8">
+				</div>
+			</form>
 
-    <section>
-      <h3>2.获取url参数-getUrlparam</h3>
-      <p>(1)调用: MT.getUrlparam(href);</p>
-      <p>(2)href为解析的url，若不传url，则默认解析当前页面地址;</p>
-    </section>
+			<div class="login">登录</div>
 
-    <section>
-      <h3>3.获取图片base64编码(图片上传)</h3>
-      <p>(1)调用: MT.getDataUrl(file, callback);</p>
-      <p>(2)file由change触发，callback为dataUrl的回调;</p>
-    </section>
-
-    <section>
-      <h3>4.获取url参数-judgePlat</h3>
-      <p>(1)调用: MT.judgePlat();</p>
-      <p>(2返回weixin/weibo;</p>
-    </section>
-
-    <section>
-      <h3>5.获取url参数-isAndroid</h3>
-      <p>(1)调用: MT.isAndroid();</p>
-      <p>(2返回true/false;</p>
-    </section>
-
-    <section>
-      <h3>6.获取url参数-isIOS</h3>
-      <p>(1)调用: MT.isIOS();</p>
-      <p>(2返回true/false;</p>
-    </section>
-
-  </body>
+			<div class="footer clearfix">
+				<a href="#">忘记密码</a>
+				<a href="#" class="register">注&nbsp;&nbsp;册</a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="./dist/js/index.js"></script>
 </html>

@@ -18,9 +18,9 @@ var compilecss = lazypipe()
 
 gulp.task('css', function() {
     //var deferred = q.defer();
-    gulp.src(['src/**/*/index.less'])
+    gulp.src(['src/css/*'])
         .pipe(compilecss())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist/css'));
         /*.pipe(rev())
         .pipe(gulp.dest('dist'))
         .pipe(rev.manifest())
@@ -38,8 +38,8 @@ gulp.task('css', function() {
 
 gulp.task('js', function() {
     gulp.src(['libs/zepto.min.js', 'libs/h5-common.js'])
-        .pipe(jshint())
-        .pipe(jshint.reporter())
+        //.pipe(jshint())
+        //.pipe(jshint.reporter())
         .pipe(concat('h5-base.js'))
         .pipe(gulp.dest('dist'))
         .pipe(uglify())
@@ -50,14 +50,20 @@ gulp.task('js', function() {
         .pipe(rev.manifest())
         .pipe(gulp.dest('./rev/js'))*/
 
-    gulp.src(['src/**/*/index.js'])
+    gulp.src(['src/js/*'])
         .pipe(jshint())
         .pipe(jshint.reporter())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist/js'));
 });
 
-// gulp.task('default', function(){
-//   gulp.watch(['src/css/*.less','libs/*.less'],['css']);
-//   gulp.watch(['src/js/*.js','libs/*.js'],['js']);
-// });
-gulp.task('default', ['css','js']);
+gulp.task('images', function() {
+    gulp.src(['src/images/*'])
+      .pipe(gulp.dest('dist/images'));
+    //return deferred.promise;
+});
+
+gulp.task('default', ['css','js', 'images'], function(){
+  gulp.watch(['src/css/*.less','libs/*.less'],['css']);
+  gulp.watch(['src/js/*.js','libs/*.js'],['js']);
+  gulp.watch(['src/images/*'],['images']);
+});
