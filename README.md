@@ -69,7 +69,10 @@
 
 ### 1.meta设置
 一般H5页面我们禁止缩放
+
+```html
 <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+```
 
 ### 2.body的默认opacity
 默认为0，适配完成后设为1，避免适配过程中的闪屏现象；
