@@ -74,6 +74,7 @@
 <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 <link rel="stylesheet" href="./dist/h5-base.css">
 <link rel="stylesheet" href="./dist/css/index.css">
+<script type="text/javascript" src="./dist/h5-base.js"></script>
 ```
 
 ### 2.body的默认opacity
