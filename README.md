@@ -72,6 +72,8 @@
 
 ```html
 <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<link rel="stylesheet" href="./dist/h5-base.css">
+<link rel="stylesheet" href="./dist/css/index.css">
 ```
 
 ### 2.body的默认opacity
@@ -81,6 +83,8 @@
 > * 所用方法都赋值在window域下的MT对象上，所以禁止window域下操作MT或者声明MT;
 > * 在页面初始化时，需调用MT.p2m方法完成屏幕适配;
 > * 如需调用其他方法，也用“MT.方法名”去调用;
+> * 由于对PC端做了事件兼容，所以调用"touchstart"或"touchend"时应该用"MT.TOUCH_START"和"MT.TOUCH_END"
 
 ## 四、DEMO
-download后，预览index.html
+下载后，请预览index.html
+![demo](./src/images/preview.png)

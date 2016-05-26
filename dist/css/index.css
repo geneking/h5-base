@@ -39,9 +39,7 @@ form {
   border: none;
   font-size: .32rem;
   background-color: #f6f6f6;
-}
-.input-wrap input:focus {
-  outline: hidden;
+  outline: none;
 }
 .login {
   width: 4.6rem;
