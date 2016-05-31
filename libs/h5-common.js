@@ -40,7 +40,7 @@
         var resizeNum = 0,
             timer     = null,
             winW      = window.innerWidth,
-            screenW   = window.screen.width;
+            screenW   = document.body.clientWidth;
         var resize = function(){
             clearTimeout(timer);
             if(screenW > 414){
