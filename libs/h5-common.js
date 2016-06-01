@@ -36,29 +36,27 @@
     * @function p2m
     * @param {designW:设计稿尺寸，一般为640px/750px}
     **/
-    MT.p2m = function(designW){
-        var resizeNum = 0,
-            timer     = null,
-            winW      = window.innerWidth,
-            screenW   = document.body.clientWidth;
-        var resize = function(){
-            clearTimeout(timer);
-            if(screenW > 414){
-              winW = 414;
-              MT.TOUCH_START = "click";
-              MT.TOUCH_END   = "click";
-            }
-            document.getElementsByTagName("html")[0].style.fontSize=(winW/designW)*100+"px";
-            if(winW>screenW && resizeNum<=10){
-                timer = setTimeout(function(){
-                    resize(++resizeNum);
-                }, 100);
-            } else {
-                document.getElementsByTagName("body")[0].style.opacity = 1;
-            }
-        };
-        timer = setTimeout(resize, 100);
-        window.onresize = resize;
+    MT.p2m = function(designW){ 
+      var resizeNum = 0;
+      var winW = window.innerWidth;
+      var resize = function() {
+        var clientW = document.body.clientWidth;
+        if (clientW > 414) {
+          winW = 414;
+          MT.TOUCH_START = "click";
+          MT.TOUCH_END = "click";
+        }
+        document.getElementsByTagName("html")[0].style.fontSize = (winW/designW)*100 + "px";
+        if (winW > clientW && resizeNum <= 10) {
+          setTimeout(function() {
+            resize(++resizeNum);
+          }, 100);
+        } else {
+          document.getElementsByTagName("body")[0].style.opacity = 1;
+        }
+      }
+      resize();
+      window.onresize = resize;
     };
 
     /**
