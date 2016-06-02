@@ -34,10 +34,12 @@
    * @param {designW:设计稿尺寸，一般为640px/750px}
    **/
    MT.p2m = function(designW){
-     var resizeNum = 0;
-     var winW = window.innerWidth;
+     var resizeNum = 0,
+         timer     = null,
+         winW      = window.innerWidth;
      var resize = function() {
        var clientW = document.body.clientWidth;
+       clearTimeout(timer);   
        if (clientW > 414) {
          winW = 414;
          MT.TOUCH_START = "click";
@@ -45,7 +47,7 @@
        }
        document.getElementsByTagName("html")[0].style.fontSize = (winW/designW)*100 + "px";
        if (winW > clientW && resizeNum <= 10) {
-         setTimeout(function() {
+         timer = setTimeout(function() {
            resize(++resizeNum);
          }, 100);
        } else {
@@ -59,7 +61,7 @@
 
 ### 2.适配过程
 > * 从p2m方法可以看出，有个动态参数designW，一般来说设计稿尺寸为640px或750px，这个按照具体情况传对应的参数；
-> * 以1rem=100px做适配，我们知道iphone6+的逻辑分辨率为414*736,其他移动设备也大不相同，所以无法做到与设计稿的对应，所以要做一个比率的缩放，即      (winW/designW)*100，rem是以根节点为基准，所以只处理html节点；
+> * 以1rem=100px做适配，我们知道iphone6+的逻辑分辨率为414*736,其他移动设备也大不相同，所以无法做到与设计稿的对应，所以要做一个比率的缩放，即 (winW/designW)x100，rem是以根节点为基准，所以只处理html节点；
 > * 因为移动端viewport的宽度平常大于设备宽度，所以以这个为判定条件之一，为什么要计算10次呢，是因为一次在低配手机上可能会适配失败；
 > * 对于pc端的兼容，当设备尺寸大于414时，文档默认414宽度，touch事件变更成click事件；
 
