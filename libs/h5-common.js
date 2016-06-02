@@ -36,11 +36,13 @@
     * @function p2m
     * @param {designW:设计稿尺寸，一般为640px/750px}
     **/
-    MT.p2m = function(designW){ 
-      var resizeNum = 0;
-      var winW = window.innerWidth;
+    MT.p2m = function(designW){
+      var resizeNum = 0,
+          timer     = null,
+          winW      = window.innerWidth;
       var resize = function() {
         var clientW = document.body.clientWidth;
+        clearTimeout(timer);   
         if (clientW > 414) {
           winW = 414;
           MT.TOUCH_START = "click";
@@ -48,7 +50,7 @@
         }
         document.getElementsByTagName("html")[0].style.fontSize = (winW/designW)*100 + "px";
         if (winW > clientW && resizeNum <= 10) {
-          setTimeout(function() {
+          timer = setTimeout(function() {
             resize(++resizeNum);
           }, 100);
         } else {
