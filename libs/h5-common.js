@@ -42,7 +42,7 @@
           winW      = window.innerWidth;
       var resize = function() {
         var clientW = document.body.clientWidth;
-        clearTimeout(timer);   
+        clearTimeout(timer);
         if (clientW > 414) {
           winW = 414;
           MT.TOUCH_START = "click";
@@ -122,7 +122,7 @@
     };
 
     /**
-    * 获取url参数
+    * 根据UA判断平台类型
     * @function judgePlat
     **/
     MT.judgePlat = function(){
