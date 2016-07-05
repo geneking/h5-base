@@ -64,18 +64,16 @@
     /**
     * 获取url参数
     * @function getUrlParam
-    * @param {name:url参数名称}
+    * @param {url: 需要解析的url}
     **/
     MT.getUrlParam = function(url) {
-      var href = url || window.location.search,
-          reg = /([^?=&]+)(=([^&]*))?/g,
-          data = {};
-      if (href) {
-        decodeURIComponent(href).replace(reg, function($0, $1, $2, $3) {
-          data[$1] = $3;
-        });
+      var data = decodeURIComponent(url || location.href).split("?")[1].split("&");
+      var param = {};
+
+      for(var i =0; i<data.length; i++){
+          param[data[i].split("=")[0]] = data[i].split("=")[1];
       }
-      return data;
+      return param;
     };
 
     /**
